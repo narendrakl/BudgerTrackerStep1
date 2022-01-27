@@ -3,10 +3,12 @@ package com.cts.budgettracker.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,11 +22,17 @@ import com.cts.budgettracker.service.AccountHolderService;
 public class AccountHolderApi {
 	
 	@Autowired
-	AccountHolderService achService;
+	private AccountHolderService achService;
 
 	@PostMapping("/add")
 	public ResponseEntity<AccountHolder> add(@RequestBody AccountHolder accountHolder) throws ProfileException{
 		return ResponseEntity.ok(achService.add(accountHolder));		
+	}
+	
+	@PutMapping
+	public ResponseEntity<AccountHolder> updateAccountHolder(@RequestBody AccountHolder accountHolder) throws ProfileException{
+		AccountHolder ach = achService.update(accountHolder);
+		return new ResponseEntity(ach, HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping
