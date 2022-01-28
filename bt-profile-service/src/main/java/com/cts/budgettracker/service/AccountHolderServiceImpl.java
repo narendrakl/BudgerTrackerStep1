@@ -55,4 +55,9 @@ public class AccountHolderServiceImpl implements AccountHolderService {
 		return achRepo.save(accountHolder);
 	}
 
+	@Override
+	public boolean existsByAccountHolderId(Long id) throws ProfileException {
+		return achRepo.existsById(id);
+	}
+
 }

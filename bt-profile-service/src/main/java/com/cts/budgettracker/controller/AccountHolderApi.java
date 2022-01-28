@@ -45,4 +45,9 @@ public class AccountHolderApi {
 		AccountHolder ach = achService.getById(ahId);
 		return ach == null? ResponseEntity.notFound().build() : ResponseEntity.ok(ach);
 	}
+	
+	@GetMapping("/{ahId}/exists")
+	public ResponseEntity<Boolean> existsByAccountHolderId(@PathVariable("ahId") Long ahId) throws ProfileException{
+		return ResponseEntity.ok(achService.existsByAccountHolderId(ahId));
+	}
 }
